@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scratch Learning Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Noto+Sans+Georgian:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#faf8f2;--fg:#1e2235;
+--card:#fff;--card-fg:#1e2235;
+--primary:#e88a17;--primary-fg:#fff;
+--secondary:#4c8bf5;--secondary-fg:#fff;
+--muted:#ede8dc;--muted-fg:#6b7280;
+--accent:#8c5cf5;--accent-fg:#fff;
+--border:#e5e0d4;
+--orange:#e88a17;--blue:#4c8bf5;--green:#32a852;--purple:#8c5cf5;--yellow:#f5a623;--red:#e55b6a;--cyan:#14b8a6;
+--radius:1rem;
+}
+body{font-family:'Nunito','Noto Sans Georgian',sans-serif;background:var(--bg);color:var(--fg);line-height:1.6}
+h1,h2,h3,h4{font-family:'Fredoka','Noto Sans Georgian',sans-serif}
+.container{max-width:1100px;margin:0 auto;padding:0 1rem}
+
+/* Animations */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.animate-float{animation:float 3s ease-in-out infinite}
+.fade-up{animation:fadeUp .6s ease both}
+.fade-in{animation:fadeIn .6s ease both}
+.scale-in{animation:scaleIn .5s ease both}
+
+/* Header */
+.header{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--border);background:rgba(255,255,255,.85);backdrop-filter:blur(12px)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:.5rem;font-family:'Fredoka','Noto Sans Georgian',sans-serif;font-size:1.2rem;font-weight:700;color:var(--fg);text-decoration:none}
+.logo-icon{width:36px;height:36px;border-radius:12px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.logo span{color:var(--primary)}
+.lang-toggle{display:flex;align-items:center;gap:.5rem;background:var(--muted);border-radius:999px;padding:3px;cursor:pointer;border:none;font-size:.85rem}
+.lang-btn{padding:4px 14px;border-radius:999px;border:none;cursor:pointer;font-weight:700;font-family:'Nunito','Noto Sans Georgian',sans-serif;transition:all .2s;background:transparent;color:var(--muted-fg)}
+.lang-btn.active{background:var(--primary);color:#fff}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;padding:3.5rem 0;background:linear-gradient(135deg,rgba(232,138,23,.1),rgba(76,139,245,.1),rgba(140,92,245,.1))}
+.hero-shapes div{position:absolute;border-radius:50%;pointer-events:none}
+.hero-shapes .s1{width:160px;height:160px;background:rgba(232,138,23,.15);top:-32px;left:-32px;animation:float 3s ease-in-out infinite}
+.hero-shapes .s2{width:112px;height:112px;background:rgba(76,139,245,.15);top:80px;right:48px;animation:float 3s ease-in-out infinite;animation-delay:1s}
+.hero-shapes .s3{width:144px;height:144px;background:rgba(140,92,245,.15);bottom:48px;left:25%;animation:float 3s ease-in-out infinite;animation-delay:2s}
+.hero-shapes .s4{width:80px;height:80px;background:rgba(50,168,82,.15);bottom:-16px;right:33%;animation:float 3s ease-in-out infinite;animation-delay:.5s}
+.hero-shapes .s5{width:64px;height:64px;background:rgba(245,166,35,.2);top:32px;left:50%;animation:float 3s ease-in-out infinite;animation-delay:1.5s}
+.hero-content{display:flex;align-items:center;gap:2rem;position:relative;flex-wrap:wrap}
+.hero-text{flex:1;min-width:280px;text-align:center}
+@media(min-width:768px){.hero-text{text-align:left}}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(232,138,23,.12);color:var(--primary);padding:6px 16px;border-radius:999px;font-size:.85rem;font-weight:700;margin-bottom:1rem}
+.hero h1{font-size:2.2rem;font-weight:700;line-height:1.2;margin-bottom:.75rem}
+@media(min-width:768px){.hero h1{font-size:3rem}}
+.hero p{font-size:1.1rem;color:var(--muted-fg);margin-bottom:1.5rem}
+.cta-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--primary);color:#fff;padding:.75rem 2rem;border-radius:999px;font-size:1rem;font-weight:700;text-decoration:none;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(232,138,23,.35);transition:all .2s;font-family:'Nunito','Noto Sans Georgian',sans-serif}
+.cta-btn:hover{box-shadow:0 6px 20px rgba(232,138,23,.45);transform:translateY(-2px)}
+.mascot-area{flex-shrink:0;display:flex;flex-direction:column;align-items:center}
+.mascot-speech{position:relative;max-width:220px;background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:.75rem 1rem;text-align:center;font-size:.85rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.08);margin-bottom:.75rem}
+.mascot-speech::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%) rotate(45deg);width:16px;height:16px;background:var(--card);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.mascot-img{width:160px;height:160px;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 4px 8px rgba(0,0,0,.12))}
+
+/* Features */
+.features{padding:4rem 0}
+.features h2{text-align:center;font-size:1.8rem;font-weight:700;margin-bottom:2.5rem}
+.features-grid{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.feature-card{background:var(--card);border:2px solid transparent;border-radius:var(--radius);padding:1.5rem;text-align:center;transition:all .25s;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.feature-card:hover{border-color:rgba(232,138,23,.2);box-shadow:0 8px 24px rgba(0,0,0,.08);transform:translateY(-4px)}
+.feature-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;font-size:1.6rem;color:#fff}
+.feature-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.35rem}
+.feature-card p{font-size:.85rem;color:var(--muted-fg)}
+
+/* Stats */
+.stats{padding:3rem 0}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+@media(min-width:768px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+.stat{text-align:center}
+.stat-icon{font-size:1.8rem;margin-bottom:.25rem}
+.stat-value{font-family:'Fredoka',sans-serif;font-size:2rem;font-weight:700}
+.stat-label{font-size:.85rem;font-weight:600;color:var(--muted-fg)}
+
+/* Roadmap */
+.roadmap{padding:4rem 0;background:linear-gradient(135deg,rgba(76,139,245,.06),rgba(50,168,82,.06))}
+.roadmap h2{text-align:center;font-size:1.8rem;font-weight:700;margin-bottom:.5rem}
+.roadmap .subtitle{text-align:center;color:var(--muted-fg);margin-bottom:2.5rem}
+.roadmap-list{max-width:700px;margin:0 auto;position:relative}
+.roadmap-line{display:none;position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--border);transform:translateX(-50%)}
+@media(min-width:768px){.roadmap-line{display:block}}
+.roadmap-item{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;position:relative}
+@media(min-width:768px){
+.roadmap-item:nth-child(even){flex-direction:row-reverse}
+}
+.roadmap-icon{flex-shrink:0;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;box-shadow:0 2px 8px rgba(0,0,0,.15);z-index:2;border:4px solid var(--bg)}
+@media(min-width:768px){
+.roadmap-icon{position:absolute;left:50%;transform:translateX(-50%)}
+}
+.roadmap-card{flex:1;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;box-shadow:0 1px 4px rgba(0,0,0,.05);transition:all .2s}
+.roadmap-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1);transform:translateY(-2px)}
+@media(min-width:768px){
+.roadmap-item:nth-child(odd) .roadmap-card{margin-right:calc(50% + 2rem)}
+.roadmap-item:nth-child(even) .roadmap-card{margin-left:calc(50% + 2rem)}
+}
+.roadmap-card h3{font-size:.95rem;font-weight:700}
+.roadmap-card p{font-size:.82rem;color:var(--muted-fg);margin-top:.25rem}
+.roadmap-card .lesson-count{font-size:.75rem;font-weight:600;color:var(--primary);margin-top:.5rem}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);background:var(--card);padding:2rem 0;text-align:center}
+.footer-logo{display:flex;align-items:center;justify-content:center;gap:.4rem;font-family:'Fredoka',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.5rem}
+.footer-logo svg{color:var(--primary)}
+.footer p{font-size:.85rem;color:var(--muted-fg);margin-bottom:.35rem}
+.footer a{color:var(--secondary);text-decoration:none;font-size:.85rem;font-weight:600}
+.footer a:hover{text-decoration:underline}
+.footer .rights{font-size:.75rem;color:rgba(107,114,128,.7);margin-top:.5rem}
+
+/* SVG icons inline helper */
+.icon-svg{display:inline-block;vertical-align:middle}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+<div class="container header-inner">
+  <a href="#" class="logo">
+    <div class="logo-icon">🐱</div>
+    Scratch<span>&nbsp;Academy</span>
+  </a>
+  <div class="lang-toggle" id="langToggle">
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn active" data-lang="ka" onclick="setLang('ka')">ქარ</button>
+  </div>
+</div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+<div class="hero-shapes">
+  <div class="s1"></div><div class="s2"></div><div class="s3"></div><div class="s4"></div><div class="s5"></div>
+</div>
+<div class="container">
+  <div class="hero-content fade-up">
+    <div class="hero-text">
+      <div class="hero-badge">✨ Scratch Programming</div>
+      <h1 data-i18n="hero.title">ისწავლე Scratch პროგრამირება!</h1>
+      <p data-i18n="hero.subtitle">სახალისო, ინტერაქტიული კურსი ახალგაზრდა პროგრამისტებისთვის</p>
+      <a href="https://scratch.mit.edu" target="_blank" class="cta-btn" data-i18n="hero.cta">დაიწყე სწავლა! →</a>
+    </div>
+    <div class="mascot-area">
+      <div class="mascot-speech" data-i18n="hero.greeting">გამარჯობა! მე ვარ სქრეჩი, შენი კოდირების მეგობარი!</div>
+      <img src="https://scratch-magic-bridge.lovable.app/lovable-uploads/mascot-placeholder.png" alt="Scratchy" class="mascot-img" onerror="this.style.fontSize='8rem';this.style.textAlign='center';this.outerHTML='<div class=\'mascot-img animate-float\' style=\'font-size:8rem;line-height:160px\'>🐱</div>'">
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Features -->
+<section class="features">
+<div class="container">
+  <h2 data-i18n="features.title">რას ისწავლი</h2>
+  <div class="features-grid">
+    <div class="feature-card fade-up" style="animation-delay:.1s">
+      <div class="feature-icon" style="background:var(--blue)">📚</div>
+      <h3 data-i18n="features.interactive">ინტერაქტიული გაკვეთილები</h3>
+      <p data-i18n="features.interactiveDesc">ნაბიჯ-ნაბიჯ გაკვეთილები რეალური Scratch პროექტებით</p>
+    </div>
+    <div class="feature-card fade-up" style="animation-delay:.2s">
+      <div class="feature-icon" style="background:var(--purple)">🧠</div>
+      <h3 data-i18n="features.quizzes">სახალისო ტესტები</h3>
+      <p data-i18n="features.quizzesDesc">შეამოწმე შენი ცოდნა საინტერესო გამოწვევებით</p>
+    </div>
+    <div class="feature-card fade-up" style="animation-delay:.3s">
+      <div class="feature-icon" style="background:var(--green)">🎮</div>
+      <h3 data-i18n="features.projects">მაგარი პროექტები</h3>
+      <p data-i18n="features.projectsDesc">შექმენი თამაშები, ისტორიები და ანიმაციები</p>
+    </div>
+    <div class="feature-card fade-up" style="animation-delay:.4s">
+      <div class="feature-icon" style="background:var(--orange)">🌍</div>
+      <h3 data-i18n="features.bilingual">ორი ენა</h3>
+      <p data-i18n="features.bilingualDesc">ისწავლე ინგლისურად ან ქართულად — შენი არჩევანი!</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+<div class="container">
+  <div class="stats-grid">
+    <div class="stat scale-in" style="animation-delay:.1s">
+      <div class="stat-icon" style="color:var(--blue)">📚</div>
+      <div class="stat-value">17+</div>
+      <div class="stat-label" data-i18n="stats.lessons">გაკვეთილი</div>
+    </div>
+    <div class="stat scale-in" style="animation-delay:.2s">
+      <div class="stat-icon" style="color:var(--purple)">🧠</div>
+      <div class="stat-value">10+</div>
+      <div class="stat-label" data-i18n="stats.quizzes">ტესტი</div>
+    </div>
+    <div class="stat scale-in" style="animation-delay:.3s">
+      <div class="stat-icon" style="color:var(--green)">🎮</div>
+      <div class="stat-value">5+</div>
+      <div class="stat-label" data-i18n="stats.projects">პროექტი</div>
+    </div>
+    <div class="stat scale-in" style="animation-delay:.4s">
+      <div class="stat-icon" style="color:var(--orange)">🌍</div>
+      <div class="stat-value">2</div>
+      <div class="stat-label" data-i18n="stats.languages">ენა</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Roadmap -->
+<section class="roadmap">
+<div class="container">
+  <h2 data-i18n="roadmap.title">შენი სასწავლო გზა</h2>
+  <p class="subtitle" data-i18n="roadmap.subtitle">დაეუფლე Scratch-ს ნაბიჯ-ნაბიჯ</p>
+  <div class="roadmap-list">
+    <div class="roadmap-line"></div>
+
+    <div class="roadmap-item fade-up" style="animation-delay:.1s">
+      <div class="roadmap-icon" style="background:var(--orange)">🚀</div>
+      <div class="roadmap-card">
+        <h3 data-i18n="ch1.title">დაწყება</h3>
+        <p data-i18n="ch1.desc">გაიგე რა არის Scratch და შეისწავლე მისი ინტერფეისი</p>
+        <div class="lesson-count">3 <span data-i18n="course.lessons">გაკვეთილი</span></div>
+      </div>
+    </div>
+
+    <div class="roadmap-item fade-up" style="animation-delay:.2s">
+      <div class="roadmap-icon" style="background:var(--blue)">🏃</div>
+      <div class="roadmap-card">
+        <h3 data-i18n="ch2.title">მოძრაობა და გარეგნობა</h3>
+        <p data-i18n="ch2.desc">ისწავლე სპრაიტების მოძრაობა, კოსტუმების შეცვლა და ანიმაციები</p>
+        <div class="lesson-count">3 <span data-i18n="course.lessons">გაკვეთილი</span></div>
+      </div>
+    </div>
+
+    <div class="roadmap-item fade-up" style="animation-delay:.3s">
+      <div class="roadmap-icon" style="background:var(--green)">🔊</div>
+      <div class="roadmap-card">
+        <h3 data-i18n="ch3.title">ხმა და მოვლენები</h3>
+        <p data-i18n="ch3.desc">დაამატე ხმები და გააკეთე ინტერაქტიული პროექტები</p>
+        <div class="lesson-count">2 <span data-i18n="course.lessons">გაკვეთილი</span></div>
+      </div>
+    </div>
+
+    <div class="roadmap-item fade-up" style="animation-delay:.4s">
+      <div class="roadmap-icon" style="background:var(--yellow)">🔁</div>
+      <div class="roadmap-card">
+        <h3 data-i18n="ch4.title">მართვის სტრუქტურები</h3>
+        <p data-i18n="ch4.desc">ისწავლე ციკლები და პირობითი ოპერატორები</p>
+        <div class="lesson-count">3 <span data-i18n="course.lessons">გაკვეთილი</span></div>
+      </div>
+    </div>
+
+    <div class="roadmap-item fade-up" style="animation-delay:.5s">
+      <div class="roadmap-icon" style="background:var(--red)">📊</div>
+      <div class="roadmap-card">
+        <h3 data-i18n="ch5.title">ცვლადები და მონაცემები</h3>
+        <p data-i18n="ch5.desc">შექმენი ცვლადები, აწარმოე ქულების დათვლა</p>
+        <div class="lesson-count">2 <span data-i18n="course.lessons">გაკვეთილი</span></div>
+      </div>
+    </div>
+
+    <div class="roadmap-item fade-up" style="animation-delay:.6s">
+      <div class="roadmap-icon" style="background:var(--purple)">⚡</div>
+      <div class="roadmap-card">
+        <h3 data-i18n="ch6.title">მოწინავე კონცეფციები</h3>
+        <p data-i18n="ch6.desc">კლონირება, საკუთარი ბლოკები და შეტყობინებები</p>
+        <div class="lesson-count">2 <span data-i18n="course.lessons">გაკვეთილი</span></div>
+      </div>
+    </div>
+
+    <div class="roadmap-item fade-up" style="animation-delay:.7s">
+      <div class="roadmap-icon" style="background:var(--cyan)">🏆</div>
+      <div class="roadmap-card">
+        <h3 data-i18n="ch7.title">საბოლოო პროექტები</h3>
+        <p data-i18n="ch7.desc">გააერთიანე ყველაფერი და შექმენი საკუთარი პროექტები</p>
+        <div class="lesson-count">2 <span data-i18n="course.lessons">გაკვეთილი</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+<div class="container">
+  <div class="footer-logo">🐱 Scratch Academy</div>
+  <p data-i18n="footer.madeWith">შექმნილია ❤️-ით ახალგაზრდა პროგრამისტებისთვის</p>
+  <a href="https://scratch.mit.edu" target="_blank" data-i18n="footer.scratchLink">ეწვიე Scratch-ს ↗</a>
+  <p class="rights" data-i18n="footer.rights">Scratch არის Scratch Foundation-ის პროექტი</p>
+</div>
+</footer>
+
+<script>
+var texts = {
+  en: {
+    "hero.title":"Learn Scratch Programming!",
+    "hero.subtitle":"A fun, interactive course for young programmers",
+    "hero.cta":"Start Learning! →",
+    "hero.greeting":"Hi there! I'm Scratchy, your coding buddy!",
+    "features.title":"What You'll Learn",
+    "features.interactive":"Interactive Lessons",
+    "features.interactiveDesc":"Step-by-step tutorials with real Scratch projects",
+    "features.quizzes":"Fun Quizzes",
+    "features.quizzesDesc":"Test your knowledge with exciting challenges",
+    "features.projects":"Cool Projects",
+    "features.projectsDesc":"Build games, stories, and animations",
+    "features.bilingual":"Two Languages",
+    "features.bilingualDesc":"Learn in English or Georgian — your choice!",
+    "stats.lessons":"Lessons",
+    "stats.quizzes":"Quizzes",
+    "stats.projects":"Projects",
+    "stats.languages":"Languages",
+    "roadmap.title":"Your Learning Journey",
+    "roadmap.subtitle":"Master Scratch step by step",
+    "course.lessons":"lessons",
+    "ch1.title":"Getting Started","ch1.desc":"Learn what Scratch is and explore its interface",
+    "ch2.title":"Motion & Looks","ch2.desc":"Move sprites, change costumes, and create animations",
+    "ch3.title":"Sound & Events","ch3.desc":"Add sounds and create interactive projects",
+    "ch4.title":"Control Flow","ch4.desc":"Learn loops and conditional statements",
+    "ch5.title":"Variables & Data","ch5.desc":"Create variables and keep score",
+    "ch6.title":"Advanced Concepts","ch6.desc":"Cloning, custom blocks, and broadcasting",
+    "ch7.title":"Final Projects","ch7.desc":"Combine everything and create your own projects",
+    "footer.madeWith":"Made with ❤️ for young programmers",
+    "footer.scratchLink":"Visit Scratch ↗",
+    "footer.rights":"Scratch is a project of the Scratch Foundation"
+  },
+  ka: {
+    "hero.title":"ისწავლე Scratch პროგრამირება!",
+    "hero.subtitle":"სახალისო, ინტერაქტიული კურსი ახალგაზრდა პროგრამისტებისთვის",
+    "hero.cta":"დაიწყე სწავლა! →",
+    "hero.greeting":"გამარჯობა! მე ვარ სქრეჩი, შენი კოდირების მეგობარი!",
+    "features.title":"რას ისწავლი",
+    "features.interactive":"ინტერაქტიული გაკვეთილები",
+    "features.interactiveDesc":"ნაბიჯ-ნაბიჯ გაკვეთილები რეალური Scratch პროექტებით",
+    "features.quizzes":"სახალისო ტესტები",
+    "features.quizzesDesc":"შეამოწმე შენი ცოდნა საინტერესო გამოწვევებით",
+    "features.projects":"მაგარი პროექტები",
+    "features.projectsDesc":"შექმენი თამაშები, ისტორიები და ანიმაციები",
+    "features.bilingual":"ორი ენა",
+    "features.bilingualDesc":"ისწავლე ინგლისურად ან ქართულად — შენი არჩევანი!",
+    "stats.lessons":"გაკვეთილი",
+    "stats.quizzes":"ტესტი",
+    "stats.projects":"პროექტი",
+    "stats.languages":"ენა",
+    "roadmap.title":"შენი სასწავლო გზა",
+    "roadmap.subtitle":"დაეუფლე Scratch-ს ნაბიჯ-ნაბიჯ",
+    "course.lessons":"გაკვეთილი",
+    "ch1.title":"დაწყება","ch1.desc":"გაიგე რა არის Scratch და შეისწავლე მისი ინტერფეისი",
+    "ch2.title":"მოძრაობა და გარეგნობა","ch2.desc":"ისწავლე სპრაიტების მოძრაობა, კოსტუმების შეცვლა და ანიმაციები",
+    "ch3.title":"ხმა და მოვლენები","ch3.desc":"დაამატე ხმები და გააკეთე ინტერაქტიული პროექტები",
+    "ch4.title":"მართვის სტრუქტურები","ch4.desc":"ისწავლე ციკლები და პირობითი ოპერატორები",
+    "ch5.title":"ცვლადები და მონაცემები","ch5.desc":"შექმენი ცვლადები, აწარმოე ქულების დათვლა",
+    "ch6.title":"მოწინავე კონცეფციები","ch6.desc":"კლონირება, საკუთარი ბლოკები და შეტყობინებები",
+    "ch7.title":"საბოლოო პროექტები","ch7.desc":"გააერთიანე ყველაფერი და შექმენი საკუთარი პროექტები",
+    "footer.madeWith":"შექმნილია ❤️-ით ახალგაზრდა პროგრამისტებისთვის",
+    "footer.scratchLink":"ეწვიე Scratch-ს ↗",
+    "footer.rights":"Scratch არის Scratch Foundation-ის პროექტი"
+  }
+};
+
+var currentLang = 'ka';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    if (texts[lang] && texts[lang][key]) {
+      el.textContent = texts[lang][key];
+    }
+  });
+}
+</script>
+</body>
+</html>
